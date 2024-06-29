@@ -46,7 +46,7 @@ func (m *Middleware) Provision(caddy.Context) error {
 	m.minify = minify.New()
 
 	m.minify.AddFunc("text/html", html.Minify)
-	m.minify.AddFunc("application/json", json.Minify)
+	m.minify.Add("application/json", &json.Minifier{KeepNumbers: true})
 	m.minify.AddFunc("image/svg+xml", svg.Minify)
 
 	return nil
